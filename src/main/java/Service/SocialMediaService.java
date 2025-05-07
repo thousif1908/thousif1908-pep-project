@@ -61,7 +61,7 @@ public class SocialMediaService
         {
             return null;
         }
-        boolean updated = dao.updateMessageText(messageId, newText) != null;
+        boolean updated = dao.updateMessageText(messageId, newText);
         if(updated)
         {
             return dao.getMessageById(messageId);

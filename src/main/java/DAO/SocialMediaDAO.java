@@ -11,22 +11,7 @@ import java.util.List;
 
 public class SocialMediaDAO
 {
-    public boolean updateMessagetext(int messageId, String newText)
-    {
-            Connection conn = ConnectionUtil.getConnection();
-            try{
-            String sql = "UPDATE message SET message_text = ? WHERE message_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, newText);
-            ps.setInt(2, messageId);
-            int rowsUpdated = ps.executeUpdate();
-            return rowsUpdated > 0;
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    
     public Account createAccount(Account account)
     {
         Connection conn = ConnectionUtil.getConnection();
@@ -223,23 +208,20 @@ public class SocialMediaDAO
         }
         return false;
     }
-    public Message updateMessageText(int messageId, String newText)
+    public boolean updateMessageText(int messageId, String newText)
     {
-        Connection conn = ConnectionUtil.getConnection();
         try{
-            String sql = "UPDATE message SET message_text = ? WHERE message_is = ?";
+            Connection conn = ConnectionUtil.getConnection();
+            String sql = "UPDATE message SET message_text = ? WHERE message_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, newText);
             ps.setInt(2, messageId);
             int rowsUpdated = ps.executeUpdate();
-            if(rowsUpdated > 0)
-            {
-                return getMessageById(messageId);
-            }
+            return rowsUpdated > 0;
         } catch(SQLException e)
         {
             e.printStackTrace();
+            return false;
         }
-        return null;
     }
 }

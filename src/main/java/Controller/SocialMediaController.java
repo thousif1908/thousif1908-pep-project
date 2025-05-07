@@ -86,9 +86,9 @@ public class SocialMediaController {
     }
     public void handleUpdateMessage(Context ctx)
     {
-        int id = Integer.parseInt(ctx.pathParam("message_id"));
-        Message incoming = ctx.bodyAsClass(Message.class);
-        Message updated = service.updateMessage(id, incoming.getMessage_text());
+        int messageId = Integer.parseInt(ctx.pathParam("message_id"));
+        Message body = ctx.bodyAsClass(Message.class);
+        Message updated = service.updateMessage(messageId, body.getMessage_text());
         if(updated != null)
         {
             ctx.json(updated);
